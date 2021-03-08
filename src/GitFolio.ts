@@ -1,16 +1,8 @@
 import yaml from "js-yaml";
-import { Octokit } from "@octokit/rest";
-import { FullProjectDetails, GitFolioConfig, ProjectDetails } from "./types";
+import { Octokit, RestEndpointMethodTypes } from "@octokit/rest";
+import { FullProjectDetails, GitFolioConfig, GitFolioFile, listUserReposResponse, ProjectDetails, RepoNameUrl, UserRepoList } from "./types";
 
 type PartialProjectDetials = Omit<FullProjectDetails, "url">;
-
-type ApiCall = {
-  ok: boolean; data: PartialProjectDetials | Error;
-} & {
-  ok: true; data: PartialProjectDetials;
-} | {
-  ok: false; data: Error;
-};
 
 export class GitFolio {
   static API_ENDPOINT = "GET /repos/{username}/{repo}/contents/.gitfolio.yml";
@@ -24,15 +16,21 @@ export class GitFolio {
 
     this._github = new Octokit({
       auth: config.apiKey,
-      userAgent: `GitFolio Crawler v1`,
+      userAgent: `GitFolio v1`,
     });
   }
 
-  async listUserRepos() {
-    return this._github.repos.listForUser({ username: this.username });
+  async getUserRepos() {
+    return this._github.paginate(this._github.repos.listForUser, {
+      username: this.username
+    });
   }
 
-  async getInfoFromRepo(repo: string): Promise<ApiCall> {
+  async getUserRepoTitles(): Promise<string[]> {
+    return (await this.getUserRepos()).map(r => r.name);
+  }
+
+  async getInfoFromRepo(repo: string): Promise<GitFolioFile> {
     try {
       const fileInfo = await this._github.request(GitFolio.API_ENDPOINT, {
         repo,
@@ -40,17 +38,14 @@ export class GitFolio {
       });
 
       const buffer = Buffer.from(fileInfo.data.content, "base64");
-      const parsed = yaml.load(buffer.toString());
+      const parsed = yaml.load(buffer.toString()) as GitFolioFile;
 
       return {
-        ok: true,
-        data: parsed as PartialProjectDetials
+        ...parsed,
+        url: `https://github.com/${this.username}/${repo}`
       };
     } catch (err) {
-      return {
-        ok: false,
-        data: err
-      };
+      return {};
     }
   }
 }

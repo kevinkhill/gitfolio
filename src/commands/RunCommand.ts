@@ -1,74 +1,87 @@
 import { Command, Option } from 'clipanion';
 
+import async from 'async';
+
+
 import { GitFolio } from "../GitFolio";
-import { FullProjectDetails, GitFolioCache } from '../types';
+import { FullProjectDetails, GitFolioCache, RepoNameUrl } from '../types';
 import { cacheFilename, readCacheFile, writeCacheFile } from '../Cache';
+import { GitFolioFile } from './../types';
 
 require("dotenv").config();
 
 export class RunCommand extends Command {
-  // name = Option.String();
+  refresh = Option.Boolean("--refresh", {
+    "description": "Refresh cache file by rescanning all user repos"
+  });
+
+  listRepos = Option.Boolean("--list-repos", {
+    "description": "List all the repositories for the user."
+  });
+
+  username = Option.String("-u,--username", { "required": true });
+
+  gitfolio!: GitFolio;
 
   static paths = [[`run`], Command.Default];
 
-  private _cache!: GitFolioCache;
-
-  get projects() { return Object.values(this._cache); }
-
   async execute() {
-    const myGitFolio = new GitFolio({
+    this.gitfolio = new GitFolio({
+      username: this.username,
       apiKey: process.env.GITHUB_API_KEY ?? "",
-      username: process.env.GITHUB_USERNAME ?? "",
     });
 
-    const cache = await readCacheFile();
 
-    if (cache.ok) {
-      console.log(`Cache found`);
+    // if (!this.refresh) {
+    //   console.log(this.refresh);
+    //   const cache = await readCacheFile();
+    // }
 
-      this._cache = cache.data;
 
-      const projects = {
-        name: "Projects",
-        source: this.projects.filter(project => project?.name)
-      };
+    // if (cache.ok) {
+    //   console.log(`Cache found`);
 
-      console.log(projects);
-    } else {
-      console.log(`Reading Repos`);
+    // const projects = {
+    //   name: "Projects",
+    //   source: this.getProjectDetails(cache.data)
+    // };
 
-      const repos = await myGitFolio.listUserRepos();
+    // console.log(projects);
+    // } else {
+    // }
+    const repos = await this.gitfolio.getUserRepoTitles();
 
-      if (repos.data) {
-        console.log(
-          `User ${myGitFolio.username} has ${repos.data.length} repositories.`
-        );
-
-        const repoList: Record<string, FullProjectDetails> = {};
-
-        for (const repo of repos.data) {
-          console.log(`Checking ${repo.name} for .gitfolio.yml`);
-
-          const info = await myGitFolio.getInfoFromRepo(repo.name);
-
-          repoList[repo.name] = {} as FullProjectDetails;
-
-          if (!info.error) {
-            repoList[repo.name] = { ...info.data, url: repo.url };
-          }
-        }
-
-        console.log(
-          `\nWriting ${cacheFilename} to disk.\nThis will speed up the next run.`
-        );
-
-        await writeCacheFile(repoList);
-
-        console.log(
-          `Done. Deleting this file will trigger a rescan of the repositories.`
-        );
-      }
+    if (this.listRepos) {
+      console.log(
+        `User ${this.gitfolio.username} has ${repos.length} repositories.`
+      );
+      console.dir(repos);
+      return;
     }
+
+    const projects = await this.scanRepos(repos);
+
+    console.log(
+      `\nWriting ${cacheFilename} to disk.\nThis will speed up the next run.`
+    );
+
+    await writeCacheFile(projects);
+
+    console.log(
+      `Done. Deleting this file will trigger a rescan of the repositories.`
+    );
+
+    console.dir(projects);
   }
 
+  /** 
+   * Scan the given repository list for `.gitfolio.yml` files
+   */
+  private async scanRepos(repoList: string[]): Promise<GitFolioFile[]> {
+    const projects: GitFolioFile[] = await async.map(repoList, async (repo, cb) => {
+      cb(null, await this.gitfolio.getInfoFromRepo(repo));
+    });
+
+    return projects.filter(o => o.name);
+  }
 }

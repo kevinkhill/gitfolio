@@ -30,7 +30,7 @@ export async function readCacheFile(): Promise<CacheReadAttempt> {
   }
 }
 
-export async function writeCacheFile(data: Record<string, FullProjectDetails>): Promise<void> {
+export async function writeCacheFile(data: Record<string, any>): Promise<void> {
   const cacheContents = JSON.stringify(data, null, 2);
 
   return fs.promises.writeFile(cacheFilepath, cacheContents);
