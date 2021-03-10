@@ -9,7 +9,13 @@ export interface GitFolioCache {
   [K: string]: FullProjectDetails;
 }
 
+export interface GitFolioCacheFile {
+  repos: string[];
+  projects: GitFolioFile[];
+}
+
 export interface GitFolioFile {
+  repo: string;
   icon?: string;
   name?: string;
   description?: string;

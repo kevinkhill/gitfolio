@@ -1,22 +1,27 @@
 import { Command, Option } from 'clipanion';
 
 import async from 'async';
+import { map } from 'lodash/fp';
 
 
 import { GitFolio } from "../GitFolio";
-import { FullProjectDetails, GitFolioCache, RepoNameUrl } from '../types';
-import { cacheFilename, readCacheFile, writeCacheFile } from '../Cache';
+import { FullProjectDetails, GitFolioCache, GitFolioCacheFile, RepoNameUrl } from '../types';
+import { cacheFilename, cacheFilepath, readCacheFile, writeCacheFile } from '../Cache';
 import { GitFolioFile } from './../types';
 
 require("dotenv").config();
 
 export class RunCommand extends Command {
-  refresh = Option.Boolean("--refresh", {
+  refresh = Option.Boolean("-r,--refresh", {
     "description": "Refresh cache file by rescanning all user repos"
   });
 
-  listRepos = Option.Boolean("--list-repos", {
+  listRepos = Option.Boolean("-l,--list-repos", {
     "description": "List all the repositories for the user."
+  });
+
+  json = Option.Boolean("-j,--json", {
+    "description": "List all project information as JSON to stdout."
   });
 
   username = Option.String("-u,--username", { "required": true });
@@ -31,47 +36,52 @@ export class RunCommand extends Command {
       apiKey: process.env.GITHUB_API_KEY ?? "",
     });
 
+    const repos = await this.getRepoList();
 
+    if (repos.length > 0) {
+      // console.log(`User ${this.gitfolio.username} has ${repos.length} repositories.`);
+
+      if (this.listRepos) {
+        return console.dir(repos);
+      }
+
+      const projects = await this.scanRepos(repos);
+
+      const cacheFile: GitFolioCacheFile = {
+        repos,
+        projects
+      }
+
+      await writeCacheFile(cacheFile);
+
+      if (this.json) {
+        this.context.stdout.write(JSON.stringify(projects));
+      }
+
+      // console.dir(`Wrote ${cacheFilepath}`);
+    }
+  }
+
+  /**
+   * @fixme This is so dumb!!
+   */
+  private async getRepoList(): Promise<string[]> {
     // if (!this.refresh) {
     //   console.log(this.refresh);
-    //   const cache = await readCacheFile();
     // }
 
+    try {
+      const cache = await readCacheFile();
 
-    // if (cache.ok) {
-    //   console.log(`Cache found`);
-
-    // const projects = {
-    //   name: "Projects",
-    //   source: this.getProjectDetails(cache.data)
-    // };
-
-    // console.log(projects);
-    // } else {
-    // }
-    const repos = await this.gitfolio.getUserRepoTitles();
-
-    if (this.listRepos) {
-      console.log(
-        `User ${this.gitfolio.username} has ${repos.length} repositories.`
-      );
-      console.dir(repos);
-      return;
+      return cache.repos;
+    } catch (err) {
+      //console.error(err);
+      try {
+        return this.gitfolio.getUserRepoTitles();
+      } catch (err) {
+        return [];
+      }
     }
-
-    const projects = await this.scanRepos(repos);
-
-    console.log(
-      `\nWriting ${cacheFilename} to disk.\nThis will speed up the next run.`
-    );
-
-    await writeCacheFile(projects);
-
-    console.log(
-      `Done. Deleting this file will trigger a rescan of the repositories.`
-    );
-
-    console.dir(projects);
   }
 
   /** 

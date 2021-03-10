@@ -138,6 +138,16 @@
   resolved "https://registry.yarnpkg.com/@types/js-yaml/-/js-yaml-4.0.0.tgz#d1a11688112091f2c711674df3a65ea2f47b5dfb"
   integrity sha512-4vlpCM5KPCL5CfGmTbpjwVKbISRYhduEJvvUWsH5EB7QInhEj94XPZ3ts/9FPiLZFqYO0xoW4ZL8z2AabTGgJA==
 
+"@types/lodash@^4.14.168":
+  version "4.14.168"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.168.tgz#fe24632e79b7ade3f132891afff86caa5e5ce008"
+  integrity sha512-oVfRvqHV/V6D1yifJbVRU3TMp8OT6o6BG+U9MkwuJ3U8/CsDHvalRpsxBqivn71ztOFZBTfJMvETbqHiaNSj7Q==
+
+"@types/node@*":
+  version "14.14.33"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.33.tgz#9e4f8c64345522e4e8ce77b334a8aaa64e2b6c78"
+  integrity sha512-oJqcTrgPUF29oUP8AsUqbXGJNuPutsetaa9kTQAQce5Lx5dTYWV02ScBiT/k1BX/Z7pKeqedmvp39Wu4zR7N7g==
+
 "@types/node@^14.14.31":
   version "14.14.31"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.31.tgz#72286bd33d137aa0d152d47ec7c1762563d34055"
@@ -152,6 +162,15 @@
   version "0.0.30"
   resolved "https://registry.yarnpkg.com/@types/strip-json-comments/-/strip-json-comments-0.0.30.tgz#9aa30c04db212a9a0649d6ae6fd50accc40748a1"
   integrity sha512-7NQmHra/JILCd1QqpSzl8+mJRc8ZHz3uDm8YV1Ks9IhK0epEiTw8aIErbvH9PI+6XbqhyIQy3462nEsn7UVzjQ==
+
+"@vercel/node@^1.9.1":
+  version "1.9.1"
+  resolved "https://registry.yarnpkg.com/@vercel/node/-/node-1.9.1.tgz#55c079a469208560fd3f9f186cb68a504c4a10a1"
+  integrity sha512-sZIEk6UtJhbW4qRSCTnTWnGOT7UR6ZrhhSvK6z9AAS/BRc+Jz1/nbwPlYjT7HjZySo32VAwpeq2VHOd3hyxKGw==
+  dependencies:
+    "@types/node" "*"
+    ts-node "8.9.1"
+    typescript "3.9.3"
 
 ansi-styles@^3.2.1:
   version "3.2.1"
@@ -773,6 +792,11 @@ load-json-file@^1.0.0:
     pinkie-promise "^2.0.0"
     strip-bom "^2.0.0"
 
+lodash@^4.17.21:
+  version "4.17.21"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
+  integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
+
 loud-rejection@^1.0.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/loud-rejection/-/loud-rejection-1.6.0.tgz#5b46f80147edee578870f086d04821cf998e551f"
@@ -1230,6 +1254,17 @@ ts-node-dev@^1.1.6:
     ts-node "^9.0.0"
     tsconfig "^7.0.0"
 
+ts-node@8.9.1:
+  version "8.9.1"
+  resolved "https://registry.yarnpkg.com/ts-node/-/ts-node-8.9.1.tgz#2f857f46c47e91dcd28a14e052482eb14cfd65a5"
+  integrity sha512-yrq6ODsxEFTLz0R3BX2myf0WBCSQh9A+py8PBo1dCzWIOcvisbyH6akNKqDHMgXePF2kir5mm5JXJTH3OUJYOQ==
+  dependencies:
+    arg "^4.1.0"
+    diff "^4.0.1"
+    make-error "^1.1.1"
+    source-map-support "^0.5.17"
+    yn "3.1.1"
+
 ts-node@^9.0.0:
   version "9.1.1"
   resolved "https://registry.yarnpkg.com/ts-node/-/ts-node-9.1.1.tgz#51a9a450a3e959401bda5f004a72d54b936d376d"
@@ -1256,6 +1291,11 @@ typanion@^3.3.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/typanion/-/typanion-3.3.0.tgz#92d949d8fb90ba90a152b97909255e5420bfc81d"
   integrity sha512-e+54C4+ozFsTorFe50JNQlXlt4HVGQUvqul7VS0GbDfKlxh3aXbJY87Yu9IdtzvJWCyTgDX7q1PeMd3FH9zZqA==
+
+typescript@3.9.3:
+  version "3.9.3"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.9.3.tgz#d3ac8883a97c26139e42df5e93eeece33d610b8a"
+  integrity sha512-D/wqnB2xzNFIcoBG9FG8cXRDjiqSTbG2wd8DMZeQyJlP1vfTkIxH4GKveWaEBYySKIg+USu+E+EDIR47SqnaMQ==
 
 typescript@^4.2.2:
   version "4.2.2"

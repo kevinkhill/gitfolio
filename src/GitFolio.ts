@@ -42,10 +42,11 @@ export class GitFolio {
 
       return {
         ...parsed,
+        repo,
         url: `https://github.com/${this.username}/${repo}`
       };
     } catch (err) {
-      return {};
+      return { repo };
     }
   }
 }

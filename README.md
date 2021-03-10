@@ -1,2 +1,3 @@
-# gitfolio
-GitFolio is a simple utility to pull portfolio information directly from your project repos
+# GitFolio
+
+GitFolio is a simple utility to aggregate your desired repository information directly from the project.

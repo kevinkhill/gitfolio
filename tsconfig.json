@@ -3,6 +3,7 @@
     "strict": true,
     "target": "ES6",
     "module": "commonjs",
+    "outDir": "./dist",
     "lib": [
       "ES2020"
     ],
