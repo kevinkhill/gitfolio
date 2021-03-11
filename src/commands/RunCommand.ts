@@ -1,13 +1,12 @@
+import async from 'async';
+
+import fs from 'fs';
+
 import { Command, Option } from 'clipanion';
 
-import async from 'async';
-import { map } from 'lodash/fp';
-
-
 import { GitFolio } from "../GitFolio";
-import { FullProjectDetails, GitFolioCache, GitFolioCacheFile, RepoNameUrl } from '../types';
-import { cacheFilename, cacheFilepath, readCacheFile, writeCacheFile } from '../Cache';
-import { GitFolioFile } from './../types';
+import { GitFolioCacheFile, GitFolioFile } from '../types';
+import { readCacheFile, writeCacheFile } from '../Cache';
 
 require("dotenv").config();
 
@@ -24,10 +23,7 @@ export class RunCommand extends Command {
     "description": "Silence all output."
   });
 
-  json = Option.Boolean("-j,--json", {
-    "description": "List all project information as JSON to stdout."
-  });
-
+  outfile = Option.String("-o,--outfile");
   username = Option.String("-u,--username", { "required": true });
 
   gitfolio!: GitFolio;
@@ -58,11 +54,13 @@ export class RunCommand extends Command {
 
       await writeCacheFile(cacheFile);
 
-      if (this.json) {
-        this.context.stdout.write(JSON.stringify(projects));
-      }
+      const json = JSON.stringify(projects, null, 2);
 
-      // console.dir(`Wrote ${cacheFilepath}`);
+      if (this.outfile) {
+        fs.promises.writeFile(this.outfile, json);
+      } else {
+        console.log(json);
+      }
     }
   }
 

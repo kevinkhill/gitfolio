@@ -20,5 +20,8 @@
     "noUncheckedIndexedAccess": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true
-  }
+  },
+  "exclude": [
+    "package.json"
+  ]
 }

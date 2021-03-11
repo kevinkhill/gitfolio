@@ -8,7 +8,7 @@
     "dist"
   ],
   "scripts": {
-    "me": "tsnd --quiet ./src/cli.ts --username kevinkhill --json",
+    "me": "tsnd ./src/cli.ts --username kevinkhill",
     "prebuild": "rimraf dist",
     "build": "tsc --module commonjs && rollup -c rollup.config.ts && typedoc --out docs --theme minimal src",
     "start": "rollup -c rollup.config.ts -w",
@@ -30,8 +30,7 @@
     "clipanion": "^3.0.0-rc.10",
     "dotenv": "^8.2.0",
     "js-yaml": "^4.0.0",
-    "lodash": "^4.17.21",
-    "step": "^1.0.0"
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "@octokit/types": "^6.12.0",
