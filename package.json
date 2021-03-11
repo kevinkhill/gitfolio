@@ -9,8 +9,9 @@
   ],
   "scripts": {
     "me": "tsnd ./src/cli.ts --username kevinkhill",
-    "prebuild": "rimraf dist",
-    "build": "tsc --module commonjs && rollup -c rollup.config.ts && typedoc --out docs --theme minimal src",
+    "prebuild": "rimraf dist/*",
+    "build": "tsup ./src/cli.ts",
+    "docs": "typedoc --out docs --theme minimal ./src",
     "start": "rollup -c rollup.config.ts -w",
     "site": "eleventy"
   },

@@ -7,7 +7,7 @@
     "lib": [
       "ES2020"
     ],
-    "rootDir": "./src",
+    "rootDir": ".",
     "skipLibCheck": true,
     "noImplicitAny": true,
     "noImplicitThis": true,
@@ -21,7 +21,8 @@
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true
   },
-  "exclude": [
-    "package.json"
+  "include": [
+    "./src/**/*.ts",
+    "./package.json"
   ]
 }
