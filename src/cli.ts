@@ -1,7 +1,6 @@
+#!/bin/env node
 import { Builtins, Cli } from 'clipanion';
-
 import { version } from "../package.json";
-
 import { RunCommand } from './commands/RunCommand';
 
 const [node, app, ...args] = process.argv;

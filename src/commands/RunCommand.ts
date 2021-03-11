@@ -20,6 +20,10 @@ export class RunCommand extends Command {
     "description": "List all the repositories for the user."
   });
 
+  quiet = Option.Boolean("-q,--quiet", {
+    "description": "Silence all output."
+  });
+
   json = Option.Boolean("-j,--json", {
     "description": "List all project information as JSON to stdout."
   });
