@@ -4,7 +4,7 @@ GitFolio is a simple utility to aggregate your desired repository information di
 
 ## Install
 
-`npm i -g gitfolio`
+`npm i gitfolio`
 
 ## Usage
 
