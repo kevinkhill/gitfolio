@@ -2,15 +2,16 @@
   "name": "gitfolio",
   "version": "0.1.0",
   "description": "Github API client for collecting gitfolio files",
-  "main": "dist/gitfolio.js",
-  "typings": "dist/types/gitfolio.d.ts",
+  "main": "./dist/cli.js",
+  "bin": "./dist/cli.js",
   "files": [
     "dist"
   ],
   "scripts": {
     "me": "tsnd ./src/cli.ts --username kevinkhill",
-    "prebuild": "rimraf dist/*",
-    "build": "tsup ./src/cli.ts",
+    "clean": "rimraf dist/*",
+    "build": "yarn clean && yarn tsc -b src",
+    "bundle": "tsup ./src/cli.ts ./src/GitFolio.ts",
     "docs": "typedoc --out docs --theme minimal ./src",
     "start": "rollup -c rollup.config.ts -w",
     "site": "eleventy"
@@ -39,7 +40,6 @@
     "@types/js-yaml": "^4.0.0",
     "@types/lodash": "^4.14.168",
     "@types/node": "^14.14.31",
-    "hugo-cli": "^0.11.0",
     "rimraf": "^3.0.2",
     "ts-node-dev": "^1.1.6",
     "tsup": "^4.6.1",

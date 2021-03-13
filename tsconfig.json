@@ -1,13 +1,14 @@
 {
   "compilerOptions": {
     "strict": true,
+    "composite": true,
     "target": "ES6",
     "module": "commonjs",
-    "outDir": "./dist",
+    "outDir": ".",
+    "rootDir": ".",
     "lib": [
       "ES2020"
     ],
-    "rootDir": ".",
     "skipLibCheck": true,
     "noImplicitAny": true,
     "noImplicitThis": true,
@@ -21,8 +22,7 @@
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": [
-    "./src/**/*.ts",
-    "./package.json"
+  "files": [
+    "package.json"
   ]
 }
