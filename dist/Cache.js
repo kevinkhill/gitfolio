@@ -35,10 +35,13 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 exports.__esModule = true;
 exports.writeCacheFile = exports.readCacheFile = exports.cacheFilepath = exports.cacheFilename = void 0;
-var path_1 = require("path");
-var fs_1 = require("fs");
+var path_1 = __importDefault(require("path"));
+var fs_1 = __importDefault(require("fs"));
 exports.cacheFilename = ".gitfolio_cache";
 exports.cacheFilepath = path_1["default"].join(process.cwd(), exports.cacheFilename);
 function readCacheFile() {

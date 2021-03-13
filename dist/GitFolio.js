@@ -46,9 +46,12 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 exports.__esModule = true;
 exports.GitFolio = void 0;
-var js_yaml_1 = require("js-yaml");
+var js_yaml_1 = __importDefault(require("js-yaml"));
 var rest_1 = require("@octokit/rest");
 var GitFolio = /** @class */ (function () {
     function GitFolio(config) {

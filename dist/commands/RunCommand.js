@@ -50,10 +50,13 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 exports.__esModule = true;
 exports.RunCommand = void 0;
-var async_1 = require("async");
-var fs_1 = require("fs");
+var async_1 = __importDefault(require("async"));
+var fs_1 = __importDefault(require("fs"));
 var clipanion_1 = require("clipanion");
 var GitFolio_1 = require("../GitFolio");
 var Cache_1 = require("../Cache");
