@@ -4,8 +4,8 @@
     "composite": true,
     "target": "es6",
     "module": "commonjs",
-    "outDir": ".",
-    "rootDir": ".",
+    "outDir": "./dist",
+    "rootDir": "./src",
     "lib": [
       "ES2020"
     ],
@@ -16,13 +16,13 @@
     "noUnusedLocals": false,
     "noImplicitReturns": true,
     "resolveJsonModule": true,
-    //"noUnusedParameters": true,
+    "noUnusedParameters": true,
     "moduleResolution": "node",
     "noUncheckedIndexedAccess": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true
   },
-  "files": [
-    "package.json"
+  "include": [
+    "./src/**/*.ts"
   ]
 }

@@ -1,8 +1,6 @@
 import yaml from "js-yaml";
-import { Octokit, RestEndpointMethodTypes } from "@octokit/rest";
-import { FullProjectDetails, GitFolioConfig, GitFolioFile, listUserReposResponse, ProjectDetails, RepoNameUrl, UserRepoList } from "./types";
-
-type PartialProjectDetials = Omit<FullProjectDetails, "url">;
+import { Octokit } from "@octokit/rest";
+import { GitFolioConfig, GitFolioFile } from "./types";
 
 export class GitFolio {
   static API_ENDPOINT = "GET /repos/{username}/{repo}/contents/.gitfolio.yml";
@@ -20,7 +18,7 @@ export class GitFolio {
     });
   }
 
-  async getUserRepos() {
+  async getUserRepos(): Promise<unknown> {
     return this._github.paginate(this._github.repos.listForUser, {
       username: this.username
     });
