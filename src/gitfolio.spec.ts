@@ -2,7 +2,7 @@ import fs from 'fs';
 import yaml from 'js-yaml';
 import path from 'path';
 
-import { GitFolio,  } from './gitfolio';
+import { GitFolio } from './gitfolio';
 import { GitFolioFile } from './types';
 
 const getClient = () => new GitFolio({

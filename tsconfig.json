@@ -20,7 +20,8 @@
     "moduleResolution": "node",
     "noUncheckedIndexedAccess": true,
     "allowSyntheticDefaultImports": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "typeRoots": ["node_modules/@types"]
   },
   "include": [
     "./src/**/*.ts"

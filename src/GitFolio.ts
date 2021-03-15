@@ -21,11 +21,13 @@ export class GitFolio {
   async getUserRepos(): Promise<unknown> {
     return this._github.paginate(this._github.repos.listForUser, {
       username: this.username
-    });
+    }) ?? [];
   }
 
   async getUserRepoTitles(): Promise<string[]> {
-    return (await this.getUserRepos()).map(r => r.name);
+    const repos: string[] = await this.getUserRepos();
+
+    return repos.map(r => r.name);
   }
 
   async getInfoFromRepo(repo: string): Promise<GitFolioFile> {
