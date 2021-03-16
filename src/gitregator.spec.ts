@@ -1,7 +1,6 @@
 import fs from "fs";
 import yaml from "js-yaml";
 import path from "path";
-import { CACHE_FILENAME } from "./cache";
 
 import GitRegator from "./gitregator";
 import { GitRegatorFile } from "./types";
