@@ -12,7 +12,7 @@ const getClient = () => new GitRegator({
 });
 
 const getLocalGitregatorFile = (): GitRegatorFile => {
-  const file = path.join(__dirname, "..", CACHE_FILENAME);
+  const file = path.join(__dirname, "..", GitRegator.GITREGATOR_FILENAME);
   return yaml.load(fs.readFileSync(file, "utf8")) as GitRegatorFile;
 };
 

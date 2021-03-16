@@ -3,7 +3,9 @@ import { Octokit } from "@octokit/rest";
 import { GitRegatorConfig, GitRegatorFile } from "./types";
 
 export default class GitRegator {
-  static API_ENDPOINT = "GET /repos/{username}/{repo}/contents/.gitRegator.yml";
+  static GITREGATOR_FILENAME = ".gitregator.yml";
+
+  static API_ENDPOINT = "GET /repos/{username}/{repo}/contents/";
 
   username: string;
 
@@ -11,7 +13,6 @@ export default class GitRegator {
 
   constructor(config: GitRegatorConfig) {
     this.username = config.username;
-
     this._github = new Octokit({
       auth: config.apiKey,
       userAgent: "GitRegator v1",
@@ -32,7 +33,9 @@ export default class GitRegator {
 
   async getInfoFromRepo(repo: string): Promise<GitRegatorFile> {
     try {
-      const fileInfo = await this._github.request(GitRegator.API_ENDPOINT, {
+      const url = GitRegator.API_ENDPOINT + "/" + GitRegator.GITREGATOR_FILENAME;
+
+      const fileInfo = await this._github.request(url, {
         repo,
         username: this.username,
       });
