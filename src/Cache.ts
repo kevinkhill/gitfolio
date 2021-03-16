@@ -1,19 +1,19 @@
 import path from "path";
 import fs from "fs";
 
-import { GitFolioCacheFile } from './types';
+import { GitRegatorCacheFile } from "./types";
 
-export const cacheFilename = ".gitfolio_cache";
-export const cacheFilepath = path.join(process.cwd(), cacheFilename);
+export const CACHE_FILENAME = ".gitregator.cache.json";
+export const CACHE_ABSPATH = path.join(process.cwd(), CACHE_FILENAME);
 
-export async function readCacheFile(): Promise<GitFolioCacheFile> {
-  const contents = await fs.promises.readFile(cacheFilepath, "utf8");
+export async function readCacheFile(): Promise<GitRegatorCacheFile> {
+  const contents = await fs.promises.readFile(CACHE_ABSPATH, "utf8");
 
-  return JSON.parse(contents) as GitFolioCacheFile;
+  return JSON.parse(contents) as GitRegatorCacheFile;
 }
 
-export async function writeCacheFile(cache: GitFolioCacheFile): Promise<void> {
+export async function writeCacheFile(cache: GitRegatorCacheFile): Promise<void> {
   const cacheContents = JSON.stringify(cache, null, 2);
 
-  return fs.promises.writeFile(cacheFilepath, cacheContents);
+  return fs.promises.writeFile(CACHE_ABSPATH, cacheContents);
 }

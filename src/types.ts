@@ -1,20 +1,20 @@
 import { Endpoints } from "@octokit/types";
 
-export interface GitFolioConfig {
+export interface GitRegatorConfig {
   apiKey: string;
   username: string;
 }
 
-export interface GitFolioCache {
+export interface GitRegatorCache {
   [K: string]: FullProjectDetails;
 }
 
-export interface GitFolioCacheFile {
+export interface GitRegatorCacheFile {
   repos: string[];
-  projects: GitFolioFile[];
+  projects: GitRegatorFile[];
 }
 
-export interface GitFolioFile {
+export interface GitRegatorFile {
   repo: string;
   icon?: string;
   name?: string;

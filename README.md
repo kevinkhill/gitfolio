@@ -1,11 +1,21 @@
-# GitFolio
+# GitRegator
 
-GitFolio is a simple utility to aggregate your desired repository information directly from the project.
+GitRegator is a simple utility to _ag-git-regate_ information from your projects on github.
 
 ## Install
 
-`npm i gitfolio`
+`npm i gitregator`
 
 ## Usage
 
-`GITHUB_API_KEY=abc123 gitfolio --username <USERNAME>`
+Drop a `.gitregator.yml` in the root of any project you want to get picked up.
+
+Load some information in it
+
+```
+icon: "fa fa-github"
+name: "GitRegator"
+description: "CLI tool for aggregating information from github projects."
+```
+
+`GITHUB_API_KEY=abc123 gitregator --username <USERNAME>`

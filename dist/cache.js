@@ -12,14 +12,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.writeCacheFile = exports.readCacheFile = exports.cacheFilepath = exports.cacheFilename = void 0;
+exports.writeCacheFile = exports.readCacheFile = exports.CACHE_ABSPATH = exports.CACHE_FILENAME = void 0;
 const path_1 = __importDefault(require("path"));
 const fs_1 = __importDefault(require("fs"));
-exports.cacheFilename = ".gitfolio_cache";
-exports.cacheFilepath = path_1.default.join(process.cwd(), exports.cacheFilename);
+exports.CACHE_FILENAME = ".gitregator.cache.json";
+exports.CACHE_ABSPATH = path_1.default.join(process.cwd(), exports.CACHE_FILENAME);
 function readCacheFile() {
     return __awaiter(this, void 0, void 0, function* () {
-        const contents = yield fs_1.default.promises.readFile(exports.cacheFilepath, "utf8");
+        const contents = yield fs_1.default.promises.readFile(exports.CACHE_ABSPATH, "utf8");
         return JSON.parse(contents);
     });
 }
@@ -27,7 +27,7 @@ exports.readCacheFile = readCacheFile;
 function writeCacheFile(cache) {
     return __awaiter(this, void 0, void 0, function* () {
         const cacheContents = JSON.stringify(cache, null, 2);
-        return fs_1.default.promises.writeFile(exports.cacheFilepath, cacheContents);
+        return fs_1.default.promises.writeFile(exports.CACHE_ABSPATH, cacheContents);
     });
 }
 exports.writeCacheFile = writeCacheFile;

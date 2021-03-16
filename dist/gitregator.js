@@ -12,15 +12,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GitFolio = void 0;
 const js_yaml_1 = __importDefault(require("js-yaml"));
 const rest_1 = require("@octokit/rest");
-class GitFolio {
+class GitRegator {
     constructor(config) {
         this.username = config.username;
         this._github = new rest_1.Octokit({
             auth: config.apiKey,
-            userAgent: `GitFolio v1`,
+            userAgent: "GitRegator v1",
         });
     }
     getUserRepos() {
@@ -40,7 +39,7 @@ class GitFolio {
     getInfoFromRepo(repo) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const fileInfo = yield this._github.request(GitFolio.API_ENDPOINT, {
+                const fileInfo = yield this._github.request(GitRegator.API_ENDPOINT, {
                     repo,
                     username: this.username,
                 });
@@ -54,5 +53,5 @@ class GitFolio {
         });
     }
 }
-exports.GitFolio = GitFolio;
-GitFolio.API_ENDPOINT = "GET /repos/{username}/{repo}/contents/.gitfolio.yml";
+exports.default = GitRegator;
+GitRegator.API_ENDPOINT = "GET /repos/{username}/{repo}/contents/.gitRegator.yml";

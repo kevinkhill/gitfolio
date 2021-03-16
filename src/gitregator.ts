@@ -1,44 +1,44 @@
 import yaml from "js-yaml";
 import { Octokit } from "@octokit/rest";
-import { GitFolioConfig, GitFolioFile } from "./types";
+import { GitRegatorConfig, GitRegatorFile } from "./types";
 
-export class GitFolio {
-  static API_ENDPOINT = "GET /repos/{username}/{repo}/contents/.gitfolio.yml";
+export default class GitRegator {
+  static API_ENDPOINT = "GET /repos/{username}/{repo}/contents/.gitRegator.yml";
 
   username: string;
 
   private _github: Octokit;
 
-  constructor(config: GitFolioConfig) {
+  constructor(config: GitRegatorConfig) {
     this.username = config.username;
 
     this._github = new Octokit({
       auth: config.apiKey,
-      userAgent: `GitFolio v1`,
+      userAgent: "GitRegator v1",
     });
   }
 
-  async getUserRepos(): Promise<unknown> {
+  async getUserRepos(): Promise<Record<string, unknown>[]> {
     return this._github.paginate(this._github.repos.listForUser, {
       username: this.username
     }) ?? [];
   }
 
   async getUserRepoTitles(): Promise<string[]> {
-    const repos: string[] = await this.getUserRepos();
+    const repos = await this.getUserRepos();
 
-    return repos.map(r => r.name);
+    return repos.map(r => r.name) as string[];
   }
 
-  async getInfoFromRepo(repo: string): Promise<GitFolioFile> {
+  async getInfoFromRepo(repo: string): Promise<GitRegatorFile> {
     try {
-      const fileInfo = await this._github.request(GitFolio.API_ENDPOINT, {
+      const fileInfo = await this._github.request(GitRegator.API_ENDPOINT, {
         repo,
         username: this.username,
       });
 
       const buffer = Buffer.from(fileInfo.data.content, "base64");
-      const parsed = yaml.load(buffer.toString()) as GitFolioFile;
+      const parsed = yaml.load(buffer.toString()) as GitRegatorFile;
 
       return {
         ...parsed,

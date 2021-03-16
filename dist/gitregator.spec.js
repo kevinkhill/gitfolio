@@ -15,27 +15,28 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = __importDefault(require("fs"));
 const js_yaml_1 = __importDefault(require("js-yaml"));
 const path_1 = __importDefault(require("path"));
-const gitfolio_1 = require("./gitfolio");
+const cache_1 = require("./cache");
+const gitregator_1 = __importDefault(require("./gitregator"));
 const getClient = () => {
     var _a;
-    return new gitfolio_1.GitFolio({
+    return new gitregator_1.default({
         username: "kevinkhill",
         apiKey: (_a = process.env.GITHUB_API_KEY) !== null && _a !== void 0 ? _a : ""
     });
 };
-const getLocalGitfolioFile = () => {
-    const file = path_1.default.join(__dirname, "..", ".gitfolio.yml");
-    return js_yaml_1.default.load(fs_1.default.readFileSync(file, 'utf8'));
+const getLocalGitregatorFile = () => {
+    const file = path_1.default.join(__dirname, "..", cache_1.CACHE_FILENAME);
+    return js_yaml_1.default.load(fs_1.default.readFileSync(file, "utf8"));
 };
 test("process.env.GITHUB_API_KEY", () => __awaiter(void 0, void 0, void 0, function* () {
     expect(process.env.GITHUB_API_KEY).toBeDefined();
 }));
-test("gitfolio.getInfoFromRepo()", () => __awaiter(void 0, void 0, void 0, function* () {
-    const local = getLocalGitfolioFile();
-    const remote = yield getClient().getInfoFromRepo("gitfolio");
+test("gitregator.getInfoFromRepo()", () => __awaiter(void 0, void 0, void 0, function* () {
+    const local = getLocalGitregatorFile();
+    const remote = yield getClient().getInfoFromRepo("gitregator");
     expect(remote).toMatchObject(local);
 }));
-test("gitfolio.getUserRepoTitles()", () => __awaiter(void 0, void 0, void 0, function* () {
+test("gitregator.getUserRepoTitles()", () => __awaiter(void 0, void 0, void 0, function* () {
     const titles = yield getClient().getUserRepoTitles();
     expect(titles.length).toBeGreaterThan(0);
 }));
