@@ -15,7 +15,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = __importDefault(require("fs"));
 const js_yaml_1 = __importDefault(require("js-yaml"));
 const path_1 = __importDefault(require("path"));
-const cache_1 = require("./cache");
 const gitregator_1 = __importDefault(require("./gitregator"));
 const getClient = () => {
     var _a;
@@ -25,7 +24,7 @@ const getClient = () => {
     });
 };
 const getLocalGitregatorFile = () => {
-    const file = path_1.default.join(__dirname, "..", cache_1.CACHE_FILENAME);
+    const file = path_1.default.join(__dirname, "..", gitregator_1.default.GITREGATOR_FILENAME);
     return js_yaml_1.default.load(fs_1.default.readFileSync(file, "utf8"));
 };
 test("process.env.GITHUB_API_KEY", () => __awaiter(void 0, void 0, void 0, function* () {

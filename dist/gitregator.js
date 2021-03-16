@@ -12,6 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.GitRegator = void 0;
 const js_yaml_1 = __importDefault(require("js-yaml"));
 const rest_1 = require("@octokit/rest");
 class GitRegator {
@@ -39,7 +40,8 @@ class GitRegator {
     getInfoFromRepo(repo) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const fileInfo = yield this._github.request(GitRegator.API_ENDPOINT, {
+                const url = GitRegator.API_ENDPOINT + "/" + GitRegator.GITREGATOR_FILENAME;
+                const fileInfo = yield this._github.request(url, {
                     repo,
                     username: this.username,
                 });
@@ -54,4 +56,6 @@ class GitRegator {
     }
 }
 exports.default = GitRegator;
-GitRegator.API_ENDPOINT = "GET /repos/{username}/{repo}/contents/.gitRegator.yml";
+exports.GitRegator = GitRegator;
+GitRegator.GITREGATOR_FILENAME = ".gitregator.yml";
+GitRegator.API_ENDPOINT = "GET /repos/{username}/{repo}/contents/";
