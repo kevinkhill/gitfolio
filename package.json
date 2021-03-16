@@ -4,15 +4,16 @@
   "description": "Client for collecting information from Github projects.",
   "keywords": [
     "git",
-    "portfolio"
+    "github"
   ],
+  "repository": "github:kevinkhill/gitregator",
   "license": "MIT",
   "author": {
     "name": "Kevin Hill",
     "email": "kevinkhill@gmail.com",
     "url": "https://kevinhill.codes"
   },
-  "main": "./dist/gitfolio.js",
+  "main": "./dist/gitregator.js",
   "files": [
     "dist"
   ],
