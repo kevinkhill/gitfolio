@@ -7,7 +7,7 @@ import { GitRegatorFile } from "./types";
 
 const getClient = () => new GitRegator({
   username: "kevinkhill",
-  apiKey: process.env.GITHUB_API_KEY ?? ""
+  apiKey: process.env.GITHUB_TOKEN ?? ""
 });
 
 const getLocalGitregatorFile = (): GitRegatorFile => {
