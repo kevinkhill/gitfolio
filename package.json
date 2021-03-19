@@ -23,7 +23,7 @@
     "docs": "typedoc --out docs --theme minimal ./src",
     "lint": "eslint ./src/**/*.ts",
     "test": "jest",
-    "cz": "commitizen",
+    "commit": "cz",
     "release": "node -r dotenv/config ./node_modules/semantic-release/bin/semantic-release.js"
   },
   "release": {
