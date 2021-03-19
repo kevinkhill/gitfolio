@@ -23,6 +23,7 @@
     "docs": "typedoc --out docs --theme minimal ./src",
     "lint": "eslint ./src/**/*.ts",
     "test": "jest",
+    "cz": "commitizen",
     "release": "node -r dotenv/config ./node_modules/semantic-release/bin/semantic-release.js"
   },
   "release": {
@@ -38,6 +39,11 @@
       "@semantic-release/git",
       "@semantic-release/github"
     ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   },
   "dependencies": {
     "@octokit/rest": "^18.3.1",
@@ -56,6 +62,8 @@
     "@types/node": "^14.14.31",
     "@typescript-eslint/eslint-plugin": "^4.17.0",
     "@typescript-eslint/parser": "^4.17.0",
+    "commitizen": "^4.2.3",
+    "cz-conventional-changelog": "^3.3.0",
     "dotenv": "^8.2.0",
     "eslint": "^7.22.0",
     "eslint-config-prettier": "^8.1.0",
