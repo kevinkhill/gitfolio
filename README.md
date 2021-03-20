@@ -1,8 +1,10 @@
 # GitRegator
 
-GitRegator is a simple utility to _ag-git-regate_ information from your projects on github.
+[![NPM version][npm-version-image]][npm-url]
+[![NPM downloads][npm-downloads-image]][npm-downloads-url]
+[![MIT License][license-image]][license-url]
 
-![NPM Verrsion](https://img.shields.io/npm/v/gitregator)![NPM Downloads](https://img.shields.io/npm/dw/gitregator)![NPM License](https://img.shields.io/npm/l/gitregator)
+GitRegator is a simple utility to _ag-git-regate_ information from your projects on github.
 
 ## Install
 
@@ -35,3 +37,22 @@ const client = new GitRegator({
   console.log(info); // { "icon": "fa fa-github", "name": "GitRegator", "description": "CLI tool ..."
 })();
 ```
+
+## Resources
+
+- [Documentation](https://gitregatorjs.com/docs/)
+- [Changelog](CHANGELOG.md)
+- [Stack Overflow](https://stackoverflow.com/questions/tagged/gitregatorjs)
+
+## License
+
+GitRegator is freely distributable under the terms of the [MIT license][license-url].
+
+[license-image]: https://img.shields.io/badge/license-MIT-blue.svg?style=flat
+[license-url]: LICENSE
+
+[npm-url]: https://npmjs.org/package/gitregator
+[npm-version-image]: https://img.shields.io/npm/v/gitregator.svg?style=flat
+
+[npm-downloads-image]: https://img.shields.io/npm/dm/gitregator.svg?style=flat
+[npm-downloads-url]: https://npmcharts.com/compare/gitregator?minimal=true
