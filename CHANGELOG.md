@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/kevinkhill/gitregator/compare/v1.2.0...v1.2.1) (2021-03-20)
+
+
+### Bug Fixes
+
+* fixing version ([d1adf0f](https://github.com/kevinkhill/gitregator/commit/d1adf0fe2c8983c8ade30f92547779c456bdaf0c))
+
 # [1.2.0](https://github.com/kevinkhill/gitregator/compare/v1.1.0...v1.2.0) (2021-03-19)
 
 
