@@ -2,6 +2,8 @@
 
 GitRegator is a simple utility to _ag-git-regate_ information from your projects on github.
 
+![NPM Verrsion](https://img.shields.io/npm/v/gitregator)![NPM Downloads](https://img.shields.io/npm/dw/gitregator)![NPM License](https://img.shields.io/npm/l/gitregator)
+
 ## Install
 
 `npm i gitregator`
