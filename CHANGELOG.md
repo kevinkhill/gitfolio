@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/kevinkhill/gitregator/compare/v1.1.0...v1.2.0) (2021-03-19)
+
+
+### Features
+
+* modifying build script and updating NPM token ([2ce2e4a](https://github.com/kevinkhill/gitregator/commit/2ce2e4a4927086fd0962d562d58f5c8dd4cbdebb))
+
 # [1.1.0](https://github.com/kevinkhill/gitregator/compare/v1.0.1...v1.1.0) (2021-03-19)
 
 
