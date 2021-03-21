@@ -32,7 +32,7 @@ const client = new GitRegator({
 });
 ```
 
-Then fetch one, or, fetch them all!
+Then fetch one
 ```javascript
 (async () => {
   const info = await client.getInfoFromRepo("<REPO_NAME>");
