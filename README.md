@@ -22,7 +22,7 @@ name: "GitRegator"
 description: "CLI tool for aggregating information from github projects."
 ```
 
-Then gitregate it all!
+Create your client
 ```javascript
 const GitRegator = require("./gitregator");
 
@@ -30,7 +30,10 @@ const client = new GitRegator({
   username: <GITHUB_USERNAME>,
   apiKey: <GITHUB_API_KEY>
 });
+```
 
+Then fetch one, or, fetch them all!
+```javascript
 (async () => {
   const info = await client.getInfoFromRepo("<REPO_NAME>");
 
@@ -38,11 +41,23 @@ const client = new GitRegator({
 })();
 ```
 
+Or fetch them all!
+```javascript
+(async () => {
+  const repos = await client.getUserRepoTitles();
+
+  if (repos.length > 0) {
+    for (const repo in repos) {
+      const info = await client.getInfoFromRepo(repo);
+      console.log(info);
+    }
+  }
+})();
+```
+
 ## Resources
 
-- [Documentation](https://gitregatorjs.com/docs/)
 - [Changelog](CHANGELOG.md)
-- [Stack Overflow](https://stackoverflow.com/questions/tagged/gitregatorjs)
 
 ## License
 
